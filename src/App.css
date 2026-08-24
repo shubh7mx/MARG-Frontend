@@ -4,6 +4,15 @@
 
 .leaflet-container {
   height: 100vh;
+  height: 100dvh;
+}
+
+/* iOS: prevent auto-zoom when focusing inputs (<16px triggers it) */
+@media (max-width: 767px) {
+  .mg-form select,
+  .mg-form input {
+    font-size: 16px;
+  }
 }
 
 /* ─── glass surface ─── */

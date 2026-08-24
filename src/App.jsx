@@ -229,7 +229,7 @@ function App() {
       </MapContainer>
 
       {/* brand */}
-      <div className="mg-glass fixed top-4 left-1/2 -translate-x-1/2 z-[500] rounded-2xl px-9 py-3.5 text-center pointer-events-none mg-rise">
+      <div className="mg-glass fixed top-3 md:top-4 left-1/2 -translate-x-1/2 z-[500] rounded-xl md:rounded-2xl px-5 md:px-9 py-2 md:py-3.5 text-center pointer-events-none mg-rise">
         <h1 className="text-lg font-semibold tracking-[0.45em] text-white leading-none pl-[0.45em]">MARG</h1>
         <p className="text-[10px] tracking-widest text-neutral-400 mt-1.5 uppercase">
           Maritime Analysis &amp; Route Generation
@@ -238,7 +238,7 @@ function App() {
       </div>
 
       {init ? (
-        <div className="mg-glass scrollbar-thin fixed bottom-6 left-8 top-24 p-6 rounded-2xl z-50 overflow-auto w-[334px] mg-rise">
+        <div className="mg-glass mg-form scrollbar-thin fixed z-50 overflow-auto inset-x-0 bottom-0 max-h-[64dvh] rounded-t-2xl p-5 pb-[max(20px,env(safe-area-inset-bottom))] md:inset-x-auto md:left-8 md:right-auto md:top-24 md:bottom-6 md:w-[334px] md:max-h-none md:p-6 md:rounded-2xl mg-rise">
           {/* ports */}
           <label className="mg-label flex items-center gap-2" style={{ animationDelay: ".08s" }}>
             <span className="mg-ic">{I.pin}</span> Origin Port
@@ -345,7 +345,7 @@ function App() {
       ) : (
         <>
           {/* results card */}
-          <div className="mg-glass fixed bottom-6 left-8 rounded-2xl px-7 py-5 z-50 min-w-[380px] max-w-[92vw] mg-rise">
+          <div className="mg-glass fixed z-50 mg-rise inset-x-2 bottom-2 rounded-2xl px-5 py-4 md:inset-x-auto md:left-8 md:right-auto md:bottom-6 md:min-w-[380px] md:max-w-[92vw] md:px-7 md:py-5">
             {/* voyage header */}
             <div className="flex items-start justify-between gap-4">
               <div className="min-w-0">
@@ -365,7 +365,7 @@ function App() {
             </div>
 
             {/* hero ETA */}
-            <div className="mt-4 flex items-end justify-between gap-4">
+            <div className="mt-4 flex flex-wrap items-end justify-between gap-x-4 gap-y-3">
               <div>
                 <p className="mg-label flex items-center gap-2 mb-0.5">
                   <span className="mg-ic">{I.clock}</span> Time Underway
@@ -392,7 +392,7 @@ function App() {
             <hr className="my-4 border-white/10" />
 
             {/* stat grid */}
-            <div className="grid grid-cols-3 gap-x-4 gap-y-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-4">
               <div>
                 <p className="mg-label flex items-center gap-1.5"><span className="mg-ic w-3 h-3">{I.route}</span>Distance</p>
                 <p className="text-base font-semibold text-white leading-tight mt-0.5 tabular-nums">
@@ -455,7 +455,7 @@ function App() {
           </div>
 
           <button
-            className="mg-glass fixed top-5 right-5 rounded-xl z-50 w-10 h-10 items-center flex justify-center text-white hover:bg-white/10 transition-colors mg-rise"
+            className="mg-glass fixed top-3 right-3 md:top-5 md:right-5 rounded-xl z-50 w-10 h-10 items-center flex justify-center text-white hover:bg-white/10 transition-colors mg-rise"
             onClick={() => { setInit(true); setRoute([]); }}
             aria-label="New voyage"
           >
