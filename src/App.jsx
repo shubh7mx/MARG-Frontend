@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import ports from "./data/indian_ocean_ports.json";
 import shipTypesData from "./data/ship_data.json";
@@ -62,21 +62,39 @@ function CountUp({ value, decimals = 0, duration = 1300 }) {
 }
 
 function AnimatedPolyline({ positions }) {
-  const ref = useRef(null);
+  const [revealed, setRevealed] = useState(0);
+
   useEffect(() => {
-    const layer = ref.current;
-    const el = layer && layer.getElement();
-    if (!el) return;
-    let len = 0;
-    try { len = el.getTotalLength(); } catch { len = 0; }
-    if (!len) return;
-    el.style.strokeDasharray = `${len}`;
-    el.style.strokeDashoffset = `${len}`;
-    el.getBoundingClientRect();
-    el.style.transition = "stroke-dashoffset 2.4s cubic-bezier(.22,.61,.36,1)";
-    requestAnimationFrame(() => { el.style.strokeDashoffset = "0"; });
+    if (!positions || positions.length < 2) { setRevealed(0); return; }
+    const total = positions.length;
+    const steps = 110;                 // ≈1.8s draw-on
+    let i = 0;
+    const id = setInterval(() => {
+      i += 1;
+      setRevealed(Math.round((i / steps) * total));
+      if (i >= steps) clearInterval(id);
+    }, 16);
+    return () => clearInterval(id);
   }, [positions]);
-  return <Polyline ref={ref} positions={positions} pathOptions={{ color: "#ffffff", weight: 3.5, opacity: 0.92 }} />;
+
+  // once fully revealed this is a completely static polyline —
+  // zoom/pan-proof by construction (no CSS dash tricks for Leaflet to fight)
+  if (!positions || positions.length < 2) return null;
+  const n = Math.max(2, Math.min(revealed, positions.length));
+
+  return (
+    <Polyline
+      positions={positions.slice(0, n)}
+      pathOptions={{
+        color: "#ffffff",
+        weight: 3.5,
+        opacity: 0.92,
+        smoothFactor: 0.2,
+        lineCap: "round",
+        lineJoin: "round",
+      }}
+    />
+  );
 }
 
 function Meter({ pct }) {
