@@ -1,0 +1,25 @@
+[package]
+name = "marg"
+version = "0.2.0"
+description = "MARG by Shubham — Maritime Analysis & Route Generation"
+authors = ["Shubham"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[build-dependencies]
+tauri-build = { version = "1", features = [] }
+
+[dependencies]
+tauri = { version = "1", features = ["shell-open"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+reqwest = { version = "0.12.7", features = ["blocking", "json"]  }
+tokio = {version = "1.40.0",features= ["full"] }
+urlencoding = "2.1.3"
+winit = "0.30.5"
+
+
+[features]
+# This feature is used for production builds or when a dev server is not specified, DO NOT REMOVE!!
+custom-protocol = ["tauri/custom-protocol"]
