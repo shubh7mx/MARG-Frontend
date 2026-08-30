@@ -2,6 +2,8 @@
 
 **Maritime Analysis & Route Generation** — optimal wind-aware ship routing for the Indian Ocean region.
 
+ma-rg.pages.dev
+
 Frontend: React + Vite + Tailwind, Leaflet map, Tauri desktop shell.
 Backend: Flask route engine (Isochrone A*) — see `../Main`.
 
